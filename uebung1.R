@@ -1,5 +1,5 @@
 3+5
-# Ctrl+enter: ausführung von Befehlen im Skriptfenster
+# Ctrl+enter: ausf?hrung von Befehlen im Skriptfenster
 
 # Vektoren
 temp <- c(7.5, 8.4, 9.1, 9.0, 10.0, 10.7, 11.8, 11.9, 12.8, 12.9)
@@ -24,7 +24,7 @@ x2 <- seq(11,19,length.out = 10)
   seq()
   seq() # tabulatortaste zeigt die attribute der funktion an (Cursor an position nach klammer auf)
   
-  ??sequence # wirft eine Übersicht von Hilfeseiten, wo der Suchbegriff auftaucht
+  ??sequence # wirft eine ?bersicht von Hilfeseiten, wo der Suchbegriff auftaucht
   
   rep(2, 10)
   eins.vec <- rep(1,10)
@@ -74,18 +74,18 @@ resp.data$x
  
  plot(x,y, xlab = "Temperatur", ylab = "log. Bodenatmung")
  # siehe VOrlesung 16.10.17: y_i \approx \beta_0 + \beta_1*x_i
- # gesucht sind die besten Werte für \beta_0, \beta_1
+ # gesucht sind die besten Werte f?r \beta_0, \beta_1
  
  # einfache Gerade von Minimum zum Maximum
  xwerte <- c(min(x), max(x))
- ywerte <- c(y[1],   y[length(y)]) # wie mit sort() und order() für komplexere Datensätze machen?
+ ywerte <- c(y[1],   y[length(y)]) # wie mit sort() und order() f?r komplexere Datens?tze machen?
  
  lines(xwerte, ywerte, col = 3, lwd = 3)
  
  # Kriterien: \item Verbinde die "Extrempunkte" (s.o.)
  #            \item \min{\limits_{\beta_0, \beta_1}} \Sum{\limits_{i=1}^{n}} (y_i - (\beta_0+ \beta_1*x_1))^2
  #            \item \min{\limits_{\beta_0, \beta_1}} \Sum{\limits_{i=1}^{n}} (y_i - (\beta_0+ \beta_1*x_1))
- ### Berechnung der Kriterien für Beispielwerte für \beta_0 (b1), \beta_1 (b2)
+ ### Berechnung der Kriterien f?r Beispielwerte f?r \beta_0 (b1), \beta_1 (b2)
  # \beta_1 = Anstieg der Geraden: \frac{y_2 - y_1}{x_2 - x_1}
  b1 <- (5.4 - 4.8)/5
  
@@ -105,7 +105,6 @@ resp.data$x
  
  
  # grid search
- 
   b0.seq <- seq(3, 5, 0.01)
   b1.seq <- seq(0, 0.15, 0.01)
   result <- matrix(0, length(b0.seq), length(b1.seq))
@@ -122,6 +121,15 @@ resp.data$x
   b0.seq[144]
   b1.seq[8]
   # beste Gerade hinsichtlich dieses Kriteriums:
-  abline(4.43, 0.07, col = 5, lwd = 4)
+  abline(4.43, 0.07, col = 5, lwd = 1)
   
   # Hausaufgabe: beste Gerade nach einem anderen Kriterium finden.
+  #lines(spline(x,y, from=3, to=16), col = "green", add=T)
+  ap <- approx(x,y);
+  apm <- cbind(ap$x, ap$y);
+  apm.min <- apm[min(ap$x),][2];
+  apm.max <- apm[max(ap$x),][2];
+  abline(apm.min, apm.max, col = "red", lwd = 1)
+  par(new=T); 
+  # das selbe mit splines
+  plot(x, y, from=3, to=16, xlab="neuer Title"); par(new=T); 
